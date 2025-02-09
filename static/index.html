@@ -627,16 +627,17 @@
     </form>
   </div>
             <script>
-  // Когда страница загрузится
-  window.addEventlistener('DOMcontentLoaded', () => {
-    // Получаем параметры из uRL
-    const urlparams = new uRLsearchparams(window.location.search);
-    // Если есть ?success=1, показываем сообщение
-    if (urlparams.has('success')) {
+  // Когда страница полностью загружена
+  window.addEventListener('DOMContentLoaded', () => {
+    // Получаем параметры из URL (например, ?success=1)
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Если есть параметр success, показываем сообщение
+    if (urlParams.has('success')) {
       alert('Форма успешно отправлена!');
     }
   });
-            </script>
+</script>
           </div>
         </div>
       </section>
