@@ -1,33 +1,58 @@
-<!DOCTYPE html>
+<!DOCTYpE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="uTF-8" />
+    <meta http-equiv="X-ua-Compatible" content="iE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Base - Tailwind CSS Startup Template</title>
-  <link rel="icon" href="favicon.ico"><link href="style.css" rel="stylesheet"></head>
-  <body
-    x-data="{ page: 'home', 'darkMode': true, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }"
-    x-init="
-      darkMode = JSON.parse(localStorage.getItem('darkMode'));
-      if (darkMode === null) darkMode = true; 
-      $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
-    :class="{'b eh': darkMode === true}"
-  >
-    <!-- ===== Header Start ===== -->
-    <header
-  class="g s r vd ya cj"
-  :class="{ 'hh sm _k dj bl ll' : stickyMenu }"
-  @scroll.window="stickyMenu = (window.pageYOffset > 20) ? true : false"
->
-  <div class="bb ze ki xn 2xl:ud-px-0 oo wf yf i">
-    <div class="vd to/4 tc wf yf">
-      <a href="index.html">
-        <img class="om" src="images/cashcar-logo-light.svg" alt="Logo Light" style="height: 70px;" />
-        <img class="xc nm" src="images/cashcar-logo-dark.svg" alt="Logo Dark" style="height: 70px;" />
-      </a>
+    <title>base - Tailwind Css startup template</title>
 
-      <!-- Hamburger Toggle BTN -->
+    <!-- Иконка сайта -->
+    <link rel="icon" href="favicon.ico" />
+
+    <!-- Ваш Css -->
+    <link href="style.css" rel="stylesheet" />
+
+    <!-- Правило для x-cloak: до загрузки alpine скрывать элементы -->
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
+
+    <!-- Подключаем alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  </head>
+  <body
+    x-data="{
+      page: 'home',
+      darkMode: true,
+      stickymenu: false,
+      navigationOpen: false,
+      scrollTop: false
+    }"
+    x-init="
+      darkMode = JsON.parse(localstorage.getitem('darkMode'));
+      if (darkMode === null) darkMode = true;
+      $watch('darkMode', value => localstorage.setitem('darkMode', JsON.stringify(value)))
+    "
+    :class="{ 'b eh': darkMode === true }"
+    x-cloak
+  >
+    <!-- ===== header start ===== -->
+    <header
+      class="g s r vd ya cj"
+      :class="{ 'hh sm _k dj bl ll' : stickymenu }"
+      @scroll.window="stickymenu = (window.pageYOffset > 20) ? true : false"
+    >
+      <div class="bb ze ki xn 2xl:ud-px-0 oo wf yf i">
+        <div class="vd to/4 tc wf yf">
+          <a href="index.html">
+            <img class="om" src="images/cashcar-logo-light.svg" alt="Logo light" style="height: 70px;" />
+            <img class="xc nm" src="images/cashcar-logo-dark.svg" alt="Logo Dark" style="height: 70px;" />
+          </a>
+
+
+      <!-- Hamburger Toggle bTN -->
       <button class="po rc" @click="navigationOpen = !navigationOpen">
         <span class="rc i pf re pd">
           <span class="du-block h q vd yc">
@@ -41,7 +66,7 @@
           </span>
         </span>
       </button>
-      <!-- Hamburger Toggle BTN -->
+      <!-- Hamburger Toggle bTN -->
     </div>
 
     <div
@@ -61,11 +86,11 @@
         <div class="pc h io pa ra" :class="navigationOpen ? '!-ud-visible' : 'd'">
           <label class="rc ab i">
             <input type="checkbox" :value="darkMode" @change="darkMode = !darkMode" class="pf vd yc uk h r za ab" />
-            <!-- Icon Sun -->
-            <svg :class="{ 'wn' : page === 'home', 'xh' : page === 'home' && stickyMenu }" class="th om" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12.0908 18.6363C10.3549 18.6363 8.69 17.9467 7.46249 16.7192C6.23497 15.4916 5.54537 13.8268 5.54537 12.0908C5.54537 10.3549 6.23497 8.69 7.46249 7.46249C8.69 6.23497 10.3549 5.54537 12.0908 5.54537C13.8268 5.54537 15.4916 6.23497 16.7192 7.46249C17.9467 8.69 18.6363 10.3549 18.6363 12.0908C18.6363 13.8268 17.9467 15.4916 16.7192 16.7192C15.4916 17.9467 13.8268 18.6363 12.0908 18.6363ZM12.0908 16.4545C13.2481 16.4545 14.358 15.9947 15.1764 15.1764C15.9947 14.358 16.4545 13.2481 16.4545 12.0908C16.4545 10.9335 15.9947 9.8236 15.1764 9.00526C14.358 8.18692 13.2481 7.72718 12.0908 7.72718C10.9335 7.72718 9.8236 8.18692 9.00526 9.00526C8.18692 9.8236 7.72718 10.9335 7.72718 12.0908C7.72718 13.2481 8.18692 14.358 9.00526 15.1764C9.8236 15.9947 10.9335 16.4545 12.0908 16.4545ZM10.9999 0.0908203H13.1817V3.36355H10.9999V0.0908203ZM10.9999 20.8181H13.1817V24.0908H10.9999V20.8181ZM2.83446 4.377L4.377 2.83446L6.69082 5.14828L5.14828 6.69082L2.83446 4.37809V4.377ZM17.4908 19.0334L19.0334 17.4908L21.3472 19.8046L19.8046 21.3472L17.4908 19.0334ZM19.8046 2.83337L21.3472 4.377L19.0334 6.69082L17.4908 5.14828L19.8046 2.83446V2.83337ZM5.14828 17.4908L6.69082 19.0334L4.377 21.3472L2.83446 19.8046L5.14828 17.4908ZM24.0908 10.9999V13.1817H20.8181V10.9999H24.0908ZM3.36355 10.9999V13.1817H0.0908203V10.9999H3.36355Z" fill=""/>
+            <!-- icon sun -->
+            <svg :class="{ 'wn' : page === 'home', 'xh' : page === 'home' && stickymenu }" class="th om" width="25" height="25" viewbox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.0908 18.6363C10.3549 18.6363 8.69 17.9467 7.46249 16.7192C6.23497 15.4916 5.54537 13.8268 5.54537 12.0908C5.54537 10.3549 6.23497 8.69 7.46249 7.46249C8.69 6.23497 10.3549 5.54537 12.0908 5.54537C13.8268 5.54537 15.4916 6.23497 16.7192 7.46249C17.9467 8.69 18.6363 10.3549 18.6363 12.0908C18.6363 13.8268 17.9467 15.4916 16.7192 16.7192C15.4916 17.9467 13.8268 18.6363 12.0908 18.6363ZM12.0908 16.4545C13.2481 16.4545 14.358 15.9947 15.1764 15.1764C15.9947 14.358 16.4545 13.2481 16.4545 12.0908C16.4545 10.9335 15.9947 9.8236 15.1764 9.00526C14.358 8.18692 13.2481 7.72718 12.0908 7.72718C10.9335 7.72718 9.8236 8.18692 9.00526 9.00526C8.18692 9.8236 7.72718 10.9335 7.72718 12.0908C7.72718 13.2481 8.18692 14.358 9.00526 15.1764C9.8236 15.9947 10.9335 16.4545 12.0908 16.4545ZM10.9999 0.0908203h13.1817V3.36355h10.9999V0.0908203ZM10.9999 20.8181h13.1817V24.0908h10.9999V20.8181ZM2.83446 4.377L4.377 2.83446L6.69082 5.14828L5.14828 6.69082L2.83446 4.37809V4.377ZM17.4908 19.0334L19.0334 17.4908L21.3472 19.8046L19.8046 21.3472L17.4908 19.0334ZM19.8046 2.83337L21.3472 4.377L19.0334 6.69082L17.4908 5.14828L19.8046 2.83446V2.83337ZM5.14828 17.4908L6.69082 19.0334L4.377 21.3472L2.83446 19.8046L5.14828 17.4908ZM24.0908 10.9999V13.1817h20.8181V10.9999h24.0908ZM3.36355 10.9999V13.1817H0.0908203V10.9999h3.36355Z" fill=""/>
             </svg>
-            <!-- Icon Sun -->
+            <!-- icon sun -->
             <img class="xc nm" src="images/icon-moon.svg" alt="Moon" />
           </label>
         </div>
@@ -74,12 +99,12 @@
   </div>
 </header>
 
-    <!-- ===== Header End ===== -->
+    <!-- ===== header End ===== -->
 
     <main>
-      <!-- ===== Hero Start ===== -->
+      <!-- ===== Hero start ===== -->
       <section class="gj do ir hj sp jr i pg">
-        <!-- Hero Images -->
+        <!-- Hero images -->
         <div class="xc fn zd/2 2xl:ud-w-187.5 bd 2xl:ud-h-171.5 h q r">
           <img src="images/shape-01.svg" alt="shape" class="xc 2xl:ud-block h t -ud-left-[10%] ua" />
           <img src="images/shape-02.svg" alt="shape" class="xc 2xl:ud-block h u p va" />
@@ -88,7 +113,7 @@
           <img src="images/volk1.png" alt="Woman" class="h q r ua volk" />
         </div>
 
-        <!-- Hero Content -->
+        <!-- Hero content -->
         <div class="bb ze ki xn 2xl:ud-px-0">
           <div class="tc _o">
             <div class="animate_left jn/2">
@@ -114,7 +139,7 @@
       </section>
       <!-- ===== Hero End ===== -->
 
-      <!-- ===== Small Features Start ===== -->
+      <!-- ===== small Features start ===== -->
        <br>
        <br>
        <br>
@@ -122,10 +147,10 @@
       <section id="features">
         <div class="bb ze ki yn 2xl:ud-px-12.5">
           <div class="tc uf zo xf ap zf bp mq">
-            <!-- Small Features Item -->
+            <!-- small Features item -->
             <div class="animate_top kn to/3 tc cg oq">
               <div class="tc wf xf cf ae cd rg mh">
-                <img src="images/icon-01.svg" alt="Icon" />
+                <img src="images/icon-01.svg" alt="icon" />
               </div>
               <div>
                 <h4 class="ek yj go kk wm xb">24/7 поддержка</h4>
@@ -133,10 +158,10 @@
               </div>
             </div>
 
-            <!-- Small Features Item -->
+            <!-- small Features item -->
             <div class="animate_top kn to/3 tc cg oq">
               <div class="tc wf xf cf ae cd rg nh">
-                <img src="images/icon-02.svg" alt="Icon" />
+                <img src="images/icon-02.svg" alt="icon" />
               </div>
               <div>
                 <h4 class="ek yj go kk wm xb">Работаем по всей России</h4>
@@ -144,10 +169,10 @@
               </div>
             </div>
 
-            <!-- Small Features Item -->
+            <!-- small Features item -->
             <div class="animate_top kn to/3 tc cg oq">
               <div class="tc wf xf cf ae cd rg oh">
-                <img src="images/icon-03.svg" alt="Icon" />
+                <img src="images/icon-03.svg" alt="icon" />
               </div>
               <div>
                 <h4 class="ek yj go kk wm xb">50 000+ клиентов</h4>
@@ -160,41 +185,41 @@
         <br>
         <br>
       </section>
-      <!-- ===== Small Features End ===== -->
+      <!-- ===== small Features End ===== -->
 
-      <!-- ===== About Start ===== -->
+      <!-- ===== about start ===== -->
 
-      <!-- ===== About End ===== -->
+      <!-- ===== about End ===== -->
 
-      <!-- ===== Team Start ===== -->
+      <!-- ===== Team start ===== -->
       <section id="fleet"  class="i pg ji gp uq">
-        <!-- Bg Shapes -->
+        <!-- bg shapes -->
         <span class="rc h s r vd fd/5 fh rm"></span>
-        <img src="images/shape-08.svg" alt="Shape Bg" class="h q r" />
-        <img src="images/shape-09.svg" alt="Shape" class="of h y z/2" />
-        <img src="images/shape-10.svg" alt="Shape" class="h _ aa" />
-        <img src="images/shape-11.svg" alt="Shape" class="of h m ba" />
+        <img src="images/shape-08.svg" alt="shape bg" class="h q r" />
+        <img src="images/shape-09.svg" alt="shape" class="of h y z/2" />
+        <img src="images/shape-10.svg" alt="shape" class="h _ aa" />
+        <img src="images/shape-11.svg" alt="shape" class="of h m ba" />
 
-        <!-- Section Title Start -->
+        <!-- section title start -->
         <div
-          x-data="{ sectionTitle: `Наш автопарк`, sectionTitleText: `Больше 5 тысяч машин. На работу, в аэропорт, на дачу, куда угодно.`}"
+          x-data="{ sectiontitle: `Наш автопарк`, sectiontitleText: `Больше 5 тысяч машин. На работу, в аэропорт, на дачу, куда угодно.`}"
         >
           <div class="animate_top bb ze rj ki xn vq">
     <h2
-            x-text="sectionTitle"
+            x-text="sectiontitle"
             class="fk vj pr kk wm on/5 gq/2 bb _b"
     >
     </h2>
-    <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+    <p class="bb on/5 wo/5 hq" x-text="sectiontitleText"></p>
 </div>
 
 
         </div>
-        <!-- Section Title End -->
+        <!-- section title End -->
 
         <div class="bb ze i va ki xn xq jb jo">
           <div class="wc qf pn xo gg cp">
-            <!-- Team Item -->
+            <!-- Team item -->
             <div class="animate_top rj">
               <div class="c i pg z-1">
                 <img class="vd" src="images/coolray.png" alt="Team" />
@@ -204,7 +229,7 @@
               <p>Мощный городской кроссовер</p>
             </div>
 
-            <!-- Team Item -->
+            <!-- Team item -->
             <div class="animate_top rj">
               <div class="c i pg z-1">
                 <img class="vd" src="images/haval.png" alt="Team" />
@@ -213,13 +238,13 @@
               <p>Вместительный кроссовер для всей семьи</p>
             </div>
 
-            <!-- Team Item -->
+            <!-- Team item -->
             <div class="animate_top rj">
               <div class="c i pg z-1">
                 <img class="vd" src="images/audi.png" alt="Team" />
               </div>
 
-              <h4 class="yj go kk wm ob zb">Audi A6</h4>
+              <h4 class="yj go kk wm ob zb">audi a6</h4>
               <p>Элегантный и мощный седан для комфортных путешествий</p>
             </div>
           </div>
@@ -227,115 +252,115 @@
       </section>
       <!-- ===== Team End ===== -->
 
-      <!-- ===== Services Start ===== -->
+      <!-- ===== services start ===== -->
       <section class="lj tp kr">
-        <!-- Section Title Start -->
+        <!-- section title start -->
         <div
-          x-data="{ sectionTitle: `Всё готово`, sectionTitleText: `Уже заправленные, застрахованные машины, готовые к аренде`}"
+          x-data="{ sectiontitle: `Всё готово`, sectiontitleText: `Уже заправленные, застрахованные машины, готовые к аренде`}"
         >
           <div class="animate_top bb ze rj ki xn vq">
     <h2
-            x-text="sectionTitle"
+            x-text="sectiontitle"
             class="fk vj pr kk wm on/5 gq/2 bb _b"
     >
     </h2>
-    <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+    <p class="bb on/5 wo/5 hq" x-text="sectiontitleText"></p>
 </div>
 
 
         </div>
-        <!-- Section Title End -->
+        <!-- section title End -->
 
         <div class="bb ze ki xn yq mb en">
           <div class="wc qf pn xo ng">
-            <!-- Service Item -->
+            <!-- service item -->
             <div class="animate_top sg oi pi zq ml il am cn _m">
-              <img src="images/icon-04.svg" alt="Icon" />
+              <img src="images/icon-04.svg" alt="icon" />
               <h4 class="ek zj kk wm nb _b">Есть Каско и ОСАГО</h4>
               <p>Всё застраховано, включая жизнь и здоровье водителя и пассажиров</p>
             </div>
 
-            <!-- Service Item -->
+            <!-- service item -->
             <div class="animate_top sg oi pi zq ml il am cn _m">
-              <img src="images/icon-05.svg" alt="Icon" />
+              <img src="images/icon-05.svg" alt="icon" />
               <h4 class="ek zj kk wm nb _b">Парковка бесплатно</h4>
               <p>Все городские парковки уже оплачены</p>
             </div>
 
-            <!-- Service Item -->
+            <!-- service item -->
             <div class="animate_top sg oi pi zq ml il am cn _m">
-              <img src="images/icon-06.svg" alt="Icon" />
+              <img src="images/icon-06.svg" alt="icon" />
               <h4 class="ek zj kk wm nb _b">Никаких хлопот</h4>
               <p>Мойку, заправку, обслуживание берем на себя</p>
             </div>
           </div>
         </div>
       </section>
-      <!-- ===== Services End ===== -->
+      <!-- ===== services End ===== -->
 
-      <!-- ===== Pricing Table Start ===== -->
+      <!-- ===== pricing table start ===== -->
       <section id="pricing" x-data="setup()" class="i pg fh rm ji gp uq">
-        <!-- Bg Shapes -->
-        <img src="images/shape-06.svg" alt="Shape" class="h aa y" />
-        <img src="images/shape-03.svg" alt="Shape" class="h ca u" />
-        <img src="images/shape-07.svg" alt="Shape" class="h w da ee" />
-        <img src="images/shape-12.svg" alt="Shape" class="h p s" />
-        <img src="images/shape-13.svg" alt="Shape" class="h r q" />
+        <!-- bg shapes -->
+        <img src="images/shape-06.svg" alt="shape" class="h aa y" />
+        <img src="images/shape-03.svg" alt="shape" class="h ca u" />
+        <img src="images/shape-07.svg" alt="shape" class="h w da ee" />
+        <img src="images/shape-12.svg" alt="shape" class="h p s" />
+        <img src="images/shape-13.svg" alt="shape" class="h r q" />
 
-        <!-- Section Title Start -->
+        <!-- section title start -->
         <div
-          x-data="{ sectionTitle: `Тарифы`, sectionTitleText: `Для которких или длинных аренд`}"
+          x-data="{ sectiontitle: `Тарифы`, sectiontitleText: `Для которких или длинных аренд`}"
         >
           <div class="animate_top bb ze rj ki xn vq">
     <h2
-            x-text="sectionTitle"
+            x-text="sectiontitle"
             class="fk vj pr kk wm on/5 gq/2 bb _b"
     >
     </h2>
-    <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+    <p class="bb on/5 wo/5 hq" x-text="sectiontitleText"></p>
 </div>
 
 
         </div>
-        <!-- Section Title End -->
+        <!-- section title End -->
 
-        <!-- Pricing switcher -->
+        <!-- pricing switcher -->
         <div class="tc wf xf jb og">
           <span class="ek kk wm">Базовая страховка</span>
-          <button class="i rg gm" x-cloak @click="billPlan == 'monthly' ? billPlan = 'annually' : billPlan = 'monthly'">
+          <button class="i rg gm" x-cloak @click="billplan == 'monthly' ? billplan = 'annually' : billplan = 'monthly'">
             <div class="fe id bl gh rg xk outline-none"></div>
             <div
               class="h vc wf xf ge jd cl jl ml mf hh rg yk ea fa"
-              :class="{ 'ff': billPlan == 'monthly', 'gf': billPlan == 'annually' }"
+              :class="{ 'ff': billplan == 'monthly', 'gf': billplan == 'annually' }"
             ></div>
           </button>
           <span class="ek kk wm">Расширенная страховка</span>
         </div>
 
-        <!-- Pricing Table -->
+        <!-- pricing table -->
         <div class="bb ze i va ki xn yq bc">
           <div class="wc qf pn xo jg">
             <template x-for="(plan, i) in plans" x-key="i">
-              <!-- Pricing Item -->
+              <!-- pricing item -->
               <div class="animate_top rj sg hh sm vk xm hi nj oj">
                 <h4 x-text="plan.name" class="wj kk wm fb"></h4>
 
                 <div class="tc wf xf kg cc">
                   <h2
-                    :class="plan.name == 'Basic' ? 'text-green-500' : ''"
-                    x-text="`от ${billPlan == 'monthly' ? plan.price.monthly : plan.price.annually} ₽`"
+                    :class="plan.name == 'basic' ? 'text-green-500' : ''"
+                    x-text="`от ${billplan == 'monthly' ? plan.price.monthly : plan.price.annually} ₽`"
                     class="fk _j kk wm"
                   ></h2>
-                  <span x-text="billPlan == 'monthly' ? '' : ''" class="sc ak kk wm"></span>
+                  <span x-text="billplan == 'monthly' ? '' : ''" class="sc ak kk wm"></span>
                 </div>
 
                 <p class="ur dc">Оплата после выбора машины</p>
 
-                <!-- Button -->
+                <!-- button -->
                 <a
                   href="#request"
                   class="ek rg lk ml il gi ri"
-                  :class="plan.name == 'Growth Plan' ? 'gh sl' : 'mh tl'"
+                  :class="plan.name == 'Growth plan' ? 'gh sl' : 'mh tl'"
                 >
                   Оставить заявку
                 </a>
@@ -353,51 +378,51 @@
           </div>
         </div>
       </section>
-      <!-- ===== Pricing Table End ===== -->
+      <!-- ===== pricing table End ===== -->
 
-      <!-- ===== Projects Start ===== -->
+      <!-- ===== projects start ===== -->
 
-      <!-- ===== Projects End ===== -->
+      <!-- ===== projects End ===== -->
 
-      <!-- ===== Testimonials Start ===== -->
+      <!-- ===== Testimonials start ===== -->
       <section id="reviews" class="hj rp hr">
-        <!-- Section Title Start -->
+        <!-- section title start -->
         <br>
         <br>
         <br>
         <div
-          x-data="{ sectionTitle: `Отзывы`, sectionTitleText: `Нам доверяют больше 50 тысяч клиентов. Попробуй и ты`}"
+          x-data="{ sectiontitle: `Отзывы`, sectiontitleText: `Нам доверяют больше 50 тысяч клиентов. Попробуй и ты`}"
         >
           <div class="animate_top bb ze rj ki xn vq">
     <h2
-            x-text="sectionTitle"
+            x-text="sectiontitle"
             class="fk vj pr kk wm on/5 gq/2 bb _b"
     >
     </h2>
-    <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+    <p class="bb on/5 wo/5 hq" x-text="sectiontitleText"></p>
 </div>
 
 
         </div>
-        <!-- Section Title End -->
+        <!-- section title End -->
 
         <div class="bb ze ki xn ar">
           <div class="animate_top jb cq">
-            <!-- Slider main container -->
+            <!-- slider main container -->
 
-              <!-- Additional required wrapper -->
+              <!-- additional required wrapper -->
 
-                <!-- Slides -->
+                <!-- slides -->
 
                   <div class="i hh rm sg vk xm bi qj">
-                    <!-- Border Shape -->
+                    <!-- border shape -->
                     <span class="rc je md/2 gh xg h q r"></span>
                     <span class="rc je md/2 mh yg h q p"></span>
 
                     <div>
-                      <img src="images/icon-quote.svg" alt="Quote" />
+                      <img src="images/icon-quote.svg" alt="quote" />
                       <p class="ek ik xj _p kc fb">
-                        Отличная компания! Машины в хорошем состоянии. Поддержка всегда на связи. Часто беру Audi A6, рекомендую!
+                        Отличная компания! Машины в хорошем состоянии. Поддержка всегда на связи. Часто беру audi a6, рекомендую!
                       </p>
 
                       <div class="tc yf vf">
@@ -409,7 +434,7 @@
                           <br>
 
                       <div>
-                        <img src="images/icon-quote.svg" alt="Quote" />
+                        <img src="images/icon-quote.svg" alt="quote" />
                         <p class="ek ik xj _p kc fb">
                           Очень удобно, все четко и быстро. Ребята молодцы!
                         </p>
@@ -423,11 +448,11 @@
                             <br>
 
                             <div>
-                              <img src="images/icon-quote.svg" alt="Quote" />
+                              <img src="images/icon-quote.svg" alt="quote" />
                               <p class="ek ik xj _p kc fb">
                                 Я в восторге! Нужна была машина для переезда в новую квартиру. Нашла вариант для себя
                               </p>
-      
+
                               <div class="tc yf vf">
                                 <div>
                                   <span class="rc ek xj kk wm zb">Елена З.</span>
@@ -439,7 +464,7 @@
                   </div>
                 </div>
               </div>
-              <!-- If we need navigation -->
+              <!-- if we need navigation -->
 
             </div>
           </div>
@@ -447,58 +472,45 @@
       </section>
       <!-- ===== Testimonials End ===== -->
 
-      <!-- ===== Counter Start ===== -->
-
-      <!-- ===== Counter End ===== -->
-
-      <!-- ===== Clients Start ===== -->
-        <!-- Section Title Start -->
-        <!-- Section Title End -->
-      <!-- ===== Clients End ===== -->
-
-      <!-- ===== Blog Start ===== -->
-
-      <!-- ===== Blog End ===== -->
-
-      <!-- ===== Contact Start ===== -->
+      <!-- ===== Contact start ===== -->
       <section id="request" class="i pg fh rm ji gp uq">
-        <!-- Bg Shapes -->
-        <img src="images/shape-06.svg" alt="Shape" class="h aa y" />
-        <img src="images/shape-03.svg" alt="Shape" class="h ca u" />
-        <img src="images/shape-07.svg" alt="Shape" class="h w da ee" />
-        <img src="images/shape-12.svg" alt="Shape" class="h p s" />
-        <img src="images/shape-13.svg" alt="Shape" class="h r q" />
+        <!-- bg shapes -->
+        <img src="images/shape-06.svg" alt="shape" class="h aa y" />
+        <img src="images/shape-03.svg" alt="shape" class="h ca u" />
+        <img src="images/shape-07.svg" alt="shape" class="h w da ee" />
+        <img src="images/shape-12.svg" alt="shape" class="h p s" />
+        <img src="images/shape-13.svg" alt="shape" class="h r q" />
 
-        <!-- Section Title Start -->
+        <!-- section title start -->
         <div
-          x-data="{ sectionTitle: `Оставить заявку`, sectionTitleText: `Заполните форму и наш менеджер свяжется с вами в течение 15 минут`}"
+          x-data="{ sectiontitle: `Оставить заявку`, sectiontitleText: `Заполните форму и наш менеджер свяжется с вами в течение 15 минут`}"
         >
           <div class="animate_top bb ze rj ki xn vq">
     <h2
-            x-text="sectionTitle"
+            x-text="sectiontitle"
             class="fk vj pr kk wm on/5 gq/2 bb _b"
     >
     </h2>
-    <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+    <p class="bb on/5 wo/5 hq" x-text="sectiontitleText"></p>
 </div>
 
 
         </div>
-        <!-- Section Title End -->
+        <!-- section title End -->
 
         <div class="i va bb ye ki xn wq jb mo">
           <div class="tc uf sn tf rn un zf xl:gap-10">
             <div class="animate_top w-full mn/5 to/3 vk sg hh sm yh rq i pg">
-              <!-- Bg Shapes -->
-              <img src="images/shape-03.svg" alt="Shape" class="h la x wd" />
-              <img src="images/shape-06.svg" alt="Shape" class="h la ma ne kf" />
+              <!-- bg shapes -->
+              <img src="images/shape-03.svg" alt="shape" class="h la x wd" />
+              <img src="images/shape-06.svg" alt="shape" class="h la ma ne kf" />
 
               <div class="fb">
                 <h4 class="wj kk wm cc">Телефон</h4>
                 <p><a href="#">8 800 333 33 39</a></p>
               </div>
               <div class="fb">
-                <h4 class="wj kk wm cc">Email</h4>
+                <h4 class="wj kk wm cc">email</h4>
                 <p><a href="#">support@cashcar.ru</a></p>
               </div>
               <div class="fb">
@@ -514,9 +526,9 @@
                 <ul class="tc wf fg">
                   <li>
                     <a href="#" class="c tc wf xf ie ld rg ml il tl">
-                      <svg class="th lm ml il" width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg class="th lm ml il" width="11" height="20" viewbox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
-                          d="M6.83366 11.3752H9.12533L10.042 7.7085H6.83366V5.87516C6.83366 4.931 6.83366 4.04183 8.667 4.04183H10.042V0.96183C9.74316 0.922413 8.61475 0.833496 7.42308 0.833496C4.93433 0.833496 3.16699 2.35241 3.16699 5.14183V7.7085H0.416992V11.3752H3.16699V19.1668H6.83366V11.3752Z"
+                          d="M6.83366 11.3752H9.12533L10.042 7.7085h6.83366V5.87516C6.83366 4.931 6.83366 4.04183 8.667 4.04183h10.042V0.96183C9.74316 0.922413 8.61475 0.833496 7.42308 0.833496C4.93433 0.833496 3.16699 2.35241 3.16699 5.14183V7.7085H0.416992V11.3752h3.16699V19.1668h6.83366V11.3752Z"
                           fill=""
                         />
                       </svg>
@@ -524,7 +536,7 @@
                   </li>
                   <li>
                     <a href="#" class="c tc wf xf ie ld rg ml il tl">
-                      <svg class="th lm ml il" width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg class="th lm ml il" width="20" height="16" viewbox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M19.3153 2.18484C18.6155 2.4944 17.8733 2.6977 17.1134 2.78801C17.9144 2.30899 18.5138 1.55511 18.8001 0.666844C18.0484 1.11418 17.2244 1.42768 16.3654 1.59726C15.7885 0.979958 15.0238 0.57056 14.1901 0.432713C13.3565 0.294866 12.5007 0.436294 11.7558 0.835009C11.0108 1.23372 10.4185 1.86739 10.0708 2.63749C9.72313 3.40759 9.63963 4.27098 9.83327 5.09343C8.30896 5.01703 6.81775 4.62091 5.45645 3.93079C4.09516 3.24067 2.89423 2.27197 1.93161 1.08759C1.59088 1.67284 1.41182 2.33814 1.41278 3.01534C1.41278 4.34451 2.08928 5.51876 3.11778 6.20626C2.50912 6.1871 1.91386 6.02273 1.38161 5.72685V5.77451C1.38179 6.65974 1.68811 7.51766 2.24864 8.20282C2.80916 8.88797 3.58938 9.3582 4.45703 9.53376C3.89201 9.68688 3.29956 9.70945 2.72453 9.59976C2.96915 10.3617 3.44595 11.0281 4.08815 11.5056C4.73035 11.9831 5.50581 12.2478 6.30594 12.2627C5.51072 12.8872 4.60019 13.3489 3.62642 13.6213C2.65264 13.8938 1.63473 13.9716 0.630859 13.8503C2.38325 14.9773 4.4232 15.5756 6.50669 15.5737C13.5586 15.5737 17.415 9.73176 17.415 4.66535C17.415 4.50035 17.4104 4.33351 17.4031 4.17035C18.1537 3.62783 18.8016 2.95578 19.3162 2.18576L19.3153 2.18484Z"
                           fill=""
@@ -534,9 +546,9 @@
                   </li>
                   <li>
                     <a href="#" class="c tc wf xf ie ld rg ml il tl">
-                      <svg class="th lm ml il" width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg class="th lm ml il" width="19" height="18" viewbox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
-                          d="M4.36198 2.58327C4.36174 3.0695 4.16835 3.53572 3.82436 3.87937C3.48037 4.22301 3.01396 4.41593 2.52773 4.41569C2.0415 4.41545 1.57528 4.22206 1.23164 3.87807C0.887991 3.53408 0.69507 3.06767 0.695313 2.58144C0.695556 2.09521 0.888943 1.62899 1.23293 1.28535C1.57692 0.941701 2.04333 0.748781 2.52956 0.749024C3.01579 0.749267 3.48201 0.942654 3.82566 1.28664C4.1693 1.63063 4.36222 2.09704 4.36198 2.58327ZM4.41698 5.77327H0.750313V17.2499H4.41698V5.77327ZM10.2103 5.77327H6.56198V17.2499H10.1736V11.2274C10.1736 7.87244 14.5461 7.56077 14.5461 11.2274V17.2499H18.167V9.98077C18.167 4.32494 11.6953 4.53577 10.1736 7.31327L10.2103 5.77327Z"
+                          d="M4.36198 2.58327C4.36174 3.0695 4.16835 3.53572 3.82436 3.87937C3.48037 4.22301 3.01396 4.41593 2.52773 4.41569C2.0415 4.41545 1.57528 4.22206 1.23164 3.87807C0.887991 3.53408 0.69507 3.06767 0.695313 2.58144C0.695556 2.09521 0.888943 1.62899 1.23293 1.28535C1.57692 0.941701 2.04333 0.748781 2.52956 0.749024C3.01579 0.749267 3.48201 0.942654 3.82566 1.28664C4.1693 1.63063 4.36222 2.09704 4.36198 2.58327ZM4.41698 5.77327H0.750313V17.2499h4.41698V5.77327ZM10.2103 5.77327h6.56198V17.2499h10.1736V11.2274C10.1736 7.87244 14.5461 7.56077 14.5461 11.2274V17.2499h18.167V9.98077C18.167 4.32494 11.6953 4.53577 10.1736 7.31327L10.2103 5.77327Z"
                           fill=""
                         />
                       </svg>
@@ -546,88 +558,94 @@
               </div>
             </div>
 
-            <div class="animate_top w-full nn/5 vo/3 vk sg hh sm yh tq">
-              <form action="https://formbold.com/s/unique_form_id" method="POST">
-                <div class="tc sf yo ap zf ep qb">
-                  <div class="vd to/2">
-                    <label class="rc ac" for="fullname">Имя</label>
-                    <input
-                      type="text"
-                      name="fullname"
-                      id="fullname"
-                      placeholder="Иван"
-                      class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi"
-                    />
-                  </div>
+  <div class="animate_top w-full nn/5 vo/3 vk sg hh sm yh tq">
+    <form id="contactform" action="/save" method="post">
+      <div class="tc sf yo ap zf ep qb">
+        <div class="vd to/2">
+          <label class="rc ac" for="fullname">Имя</label>
+          <input
+            type="text"
+            name="fullname"
+            id="fullname"
+            placeholder="Иван"
+            class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi"
+          />
+        </div>
 
-                  <div class="vd to/2">
-                    <label class="rc ac" for="email">Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      placeholder="vanya@ya.ru"
-                      class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi"
-                    />
-                  </div>
-                </div>
+        <div class="vd to/2">
+          <label class="rc ac" for="email">email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="vanya@ya.ru"
+            class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi"
+          />
+        </div>
+      </div>
 
-                <div class="tc sf yo ap zf ep qb">
-                  <div class="vd to/2">
-                    <label class="rc ac" for="phone">Телефон</label>
-                    <input
-                      type="text"
-                      name="phone"
-                      id="phone"
-                      placeholder="+7 987 654 32 10"
-                      class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi"
-                    />
-                  </div>
+      <div class="tc sf yo ap zf ep qb">
+        <div class="vd to/2">
+          <label class="rc ac" for="phone">Телефон</label>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="+7 987 654 32 10"
+            class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi"
+          />
+        </div>
 
-                  <div class="vd to/2">
-                    <label class="rc ac" for="subject">Тариф</label>
-                    <input
-                      type="text"
-                      for="subject"
-                      id="subject"
-                      placeholder="Фикс, Часы или Дни"
-                      class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi"
-                    />
-                  </div>
-                </div>
+        <div class="vd to/2">
+          <label class="rc ac" for="subject">Тариф</label>
+          <input
+            type="text"
+            name="subject"
+            id="subject"
+            placeholder="Фикс, Часы или Дни"
+            class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 xi mi"
+          />
+        </div>
+      </div>
 
-                <div class="fb">
-                  <label class="rc ac" for="message">Желаемая машина и другие детали</label>
-                  <textarea
-                    placeholder="Красненький Geely Coolray Flagship с открывающейся крышей"
-                    rows="4"
-                    name="message"
-                    id="message"
-                    class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 ci"
-                  ></textarea>
-                </div>
+      <div class="fb">
+        <label class="rc ac" for="message">Желаемая машина и другие детали</label>
+        <textarea
+          placeholder="Красненький Geely Coolray Flagship с открывающейся крышей"
+          rows="4"
+          name="message"
+          id="message"
+          class="vd ph sg zk xm _g ch pm hm dm dn em pl/50 ci"
+        ></textarea>
+      </div>
 
-                <div class="tc xf">
-                  <button class="vc rg lk gh ml il hi gi _l">Отправить заявку</button>
-                </div>
-              </form>
-            </div> 
+      <div class="tc xf">
+        <button type="submit" class="vc rg lk gh ml il hi gi _l">
+          Отправить заявку
+        </button>
+      </div>
+    </form>
+  </div>
+            <script>
+  // Когда страница загрузится
+  window.addEventlistener('DOMcontentLoaded', () => {
+    // Получаем параметры из uRL
+    const urlparams = new uRLsearchparams(window.location.search);
+    // Если есть ?success=1, показываем сообщение
+    if (urlparams.has('success')) {
+      alert('Форма успешно отправлена!');
+    }
+  });
+            </script>
           </div>
         </div>
       </section>
       <!-- ===== Contact End ===== -->
-
-      <!-- ===== CTA Start ===== -->
-
-      <!-- ===== CTA End ===== -->
     </main>
-    <!-- ===== Footer Start ===== -->
+    <!-- ===== footer start ===== -->
     <footer>
   <div class="bb ze ki xn 2xl:ud-px-0">
-    <!-- Footer Top -->
-    <!-- Footer Top -->
-
-    <!-- Footer Bottom -->
+    <!-- footer bottom -->
     <div class="bh ch pm tc uf sf yo wf xf ap cg fp bj">
       <div class="animate_top">
         <ul class="tc wf gg">
@@ -635,36 +653,36 @@
       </div>
 
       <div class="animate_top">
-        <p>&copy; 2025 Кашкар by Nikolai S</p>
+        <p>&copy; 2025 Кашкар by Nikolai s</p>
       </div>
     </div>
-    <!-- Footer Bottom -->
+    <!-- footer bottom -->
   </div>
 </footer>
 
-    <!-- ===== Footer End ===== -->
+    <!-- ===== footer End ===== -->
 
-    <!-- ====== Back To Top Start ===== -->
+    <!-- ====== back To Top start ===== -->
     <button
   class="xc wf xf ie ld vg sr gh tr g sa ta _a"
   @click="window.scrollTo({top: 0, behavior: 'smooth'})"
   @scroll.window="scrollTop = (window.pageYOffset > 50) ? true : false"
   :class="{ 'uc' : scrollTop }"
 >
-  <svg class="uh se qd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <svg class="uh se qd" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
     <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
   </svg>
 </button>
 
-    <!-- ====== Back To Top End ===== -->
+    <!-- ====== back To Top End ===== -->
 
     <script>
-      //  Pricing Table
+      //  pricing table
       const setup = () => {
         return {
-          isNavOpen: false,
+          isnavOpen: false,
 
-          billPlan: 'monthly',
+          billplan: 'monthly',
 
           plans: [
             {
