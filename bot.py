@@ -15,6 +15,7 @@ authorized_users = set()
 # ключ: chat_id, значение: request_id, для которого менеджер нажал "Взять в работу"
 pending_executor = {}
 
+
 #############################################
 # Вспомогательная функция для формирования сообщения заявки
 
@@ -42,13 +43,14 @@ def build_request_message(req):
         # Если заявка новая, показываем кнопку "Взять в работу"
         markup.add(types.InlineKeyboardButton("✅ Взять в работу", callback_data=f"take:{req[0]}"))
     elif req[7] == "in_progress":
-        # Если заявка в работе, показываем кнопки "Успешно" и "Отказ"
+        # Если заявка в работе, показываем кнопки "🏁 Успешно" и "❌ Отказ"
         markup.add(types.InlineKeyboardButton("🏁 Успешно", callback_data=f"close:{req[0]}"))
         markup.add(types.InlineKeyboardButton("❌ Отказ", callback_data=f"reject:{req[0]}"))
     elif req[7] in ["completed", "rejected"]:
-        # Если заявка закрыта или отклонена, показываем кнопку "Вернуть в работу"
+        # Если заявка закрыта или отклонена, показываем кнопку "↩️ Вернуть в работу"
         markup.add(types.InlineKeyboardButton("↩️ Вернуть в работу", callback_data=f"return:{req[0]}"))
     return text, markup
+
 
 #############################################
 # --- Команды бота ---
@@ -63,6 +65,25 @@ def handle_start(message):
         bot.reply_to(message, "✅ Авторизация успешна. Добро пожаловать в CRM-бот!")
     else:
         bot.reply_to(message, "❌ Неверная секретная фраза. Попробуйте снова.")
+
+
+@bot.message_handler(commands=['help'])
+def handle_help(message):
+    help_text = (
+        "ℹ️ <b>Список команд CRM‑бота:</b>\n\n"
+        "/start &lt;секретная_фраза&gt; – авторизация менеджера\n"
+        "/help – вывод списка команд и инструкций\n"
+        "/list – показать список всех заявок\n"
+        "/show &lt;ID&gt; – показать детали заявки с указанным ID с кнопками для управления\n\n"
+        "После отображения заявки с помощью команды /show, под сообщением появятся кнопки:\n"
+        "✅ Взять в работу – назначить исполнителя (при этом бот запросит имя)\n"
+        "🏁 Успешно – отметить заявку как успешно выполненную\n"
+        "❌ Отказ – отметить заявку как отказ\n"
+        "↩️ Вернуть в работу – вернуть заявку в статус «в работе» (если она закрыта или отклонена)\n\n"
+        "Если команда введена неверно, рекомендую воспользоваться командой /help."
+    )
+    bot.reply_to(message, help_text, parse_mode='HTML')
+
 
 @bot.message_handler(commands=['list'])
 def handle_list(message):
@@ -90,6 +111,7 @@ def handle_list(message):
         response += "-----------------------\n"
     bot.reply_to(message, response, parse_mode='HTML')
 
+
 # Команда /show <id> — показать заявку с указанным ID
 @bot.message_handler(commands=['show'])
 def handle_show(message):
@@ -116,6 +138,7 @@ def handle_show(message):
     text, markup = build_request_message(req)
     bot.send_message(message.chat.id, text, parse_mode='HTML', reply_markup=markup)
 
+
 #############################################
 # Обработка inline-кнопок
 
@@ -130,6 +153,7 @@ def callback_take(call):
     pending_executor[call.message.chat.id] = request_id
     bot.send_message(call.message.chat.id, f"Введите имя исполнителя для заявки ID {request_id}:")
     bot.answer_callback_query(call.id)
+
 
 # Обработчик для ввода имени исполнителя
 @bot.message_handler(func=lambda message: message.chat.id in pending_executor)
@@ -149,8 +173,11 @@ def handle_executor_input(message):
                 bot.send_message(chat_id, text, parse_mode='HTML', reply_markup=markup)
         bot.reply_to(message, f"✅ Заявка {request_id} принята в работу с исполнителем {executor}.")
 
+
 # Inline-кнопки для действий: "Успешно" (ранее "Закрыть"), "Отказ" (ранее "Отклонить"), "Вернуть в работу"
-@bot.callback_query_handler(func=lambda call: call.data.startswith("close:") or call.data.startswith("reject:") or call.data.startswith("return:"))
+@bot.callback_query_handler(
+    func=lambda call: call.data.startswith("close:") or call.data.startswith("reject:") or call.data.startswith(
+        "return:"))
 def callback_status_change(call):
     if call.message.chat.id not in authorized_users:
         bot.answer_callback_query(call.id, "🚫 Вы не авторизованы.")
@@ -175,9 +202,11 @@ def callback_status_change(call):
     if updated_req:
         text, markup = build_request_message(updated_req)
         try:
-            bot.edit_message_text(text, call.message.chat.id, call.message.message_id, parse_mode='HTML', reply_markup=markup)
+            bot.edit_message_text(text, call.message.chat.id, call.message.message_id, parse_mode='HTML',
+                                  reply_markup=markup)
         except Exception as e:
             print("Ошибка обновления сообщения:", e)
+
 
 #############################################
 # Функция для отправки уведомления о новой заявке
@@ -189,9 +218,12 @@ def notify_new_request(req):
         except Exception as e:
             print(f"Ошибка отправки уведомления пользователю {user_id}: {e}")
 
+
 #############################################
 # Фоновый поток для опроса базы данных на наличие новых заявок
 last_request_id = 0
+
+
 def poll_new_requests():
     global last_request_id
     while True:
@@ -208,8 +240,18 @@ def poll_new_requests():
             print("Ошибка опроса новых заявок:", e)
         time.sleep(5)
 
+
 polling_thread = threading.Thread(target=poll_new_requests, daemon=True)
 polling_thread.start()
+
+
+@bot.message_handler(func=lambda message: message.text.startswith("/"))
+def handle_unknown_command(message):
+    # Если команда не /start, /help, /list, /show, обрабатываем как неизвестную
+    known_commands = ['/start', '/help', '/list', '/show']
+    if not any(message.text.startswith(cmd) for cmd in known_commands):
+        bot.reply_to(message, "❌ Неверная команда. Рекомендую посмотреть /help.")
+
 
 if __name__ == '__main__':
     print("Бот запущен...")
