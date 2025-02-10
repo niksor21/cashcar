@@ -2,6 +2,7 @@ import logging
 from flask import Flask, send_from_directory, request, redirect
 import os
 import sqlite3
+from datetime import datetime
 
 # Настраиваем логирование: уровень DEBUG, формат с датой/временем.
 logging.basicConfig(
@@ -41,7 +42,7 @@ def save():
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # Создаём таблицу, если ещё не существует
+    # Создаём таблицу, если ещё не существует, добавляем поле для времени
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS contacts (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -49,15 +50,19 @@ def save():
             email TEXT,
             phone TEXT,
             subject TEXT,
-            message TEXT
+            message TEXT,
+            timestamp TEXT DEFAULT CURRENT_TIMESTAMP
         )
     ''')
 
-    # Вставляем данные
+    # Получаем текущее время
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    # Вставляем данные с временной меткой
     cursor.execute('''
-        INSERT INTO contacts (fullname, email, phone, subject, message)
-        VALUES (?, ?, ?, ?, ?)
-    ''', (fullname, email, phone, subject, message))
+        INSERT INTO contacts (fullname, email, phone, subject, message, timestamp)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ''', (fullname, email, phone, subject, message, timestamp))
 
     conn.commit()
     conn.close()
